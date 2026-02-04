@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if ! which brew > /dev/null; then
+  echo "Homebrew is NOT installed. Go to https://brew.sh/ for installation instructions."
+fi
+
+echo ""
+echo "🔁 Installing go and postgres via Homebrew..."
+echo ""
+
+brew install go
+brew install postgresql

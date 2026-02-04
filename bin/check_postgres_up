@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Dev-only script to ensure postgres is up
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=${1:-recipes}
+DB_USER=recipes
+export PGPASSWORD=recipes
+
+# Other setup commands possibly needed for postgres
+# ALTER ROLE recipes WITH LOGIN;
+# CREATE ROLE recipes superuser;
+# createuser recipes
+# alter user recipes with encrypted password 'recipes'
+# grant all privileges on database recipes to recipes
+
+# Loop until PostgreSQL is up and accepting connections
+until psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c '\q' > /dev/null 2>&1; do
+  echo "Awaiting PostgresSQL warmup..."
+  sleep 1
+done
+
+echo "PostgreSQL is up!"
+exit 0
