@@ -1,0 +1,21 @@
+{{if .}}
+{{range .}}
+<div class="flex items-center justify-between p-4 border-b border-gray-200 hover:bg-gray-50 transition">
+    <div class="flex items-center gap-3 flex-1">
+        <span class="text-gray-800">
+            {{.Title}}
+        </span>
+    </div>
+    <button
+            hx-delete="/recipes/{{.ID}}"
+            hx-target="#recipes-list"
+            hx-swap="innerHTML"
+            hx-confirm="Delete this recipe?"
+            class="px-3 py-1 text-red-500 hover:bg-red-50 rounded transition">
+        🗑️ Delete
+    </button>
+</div>
+{{end}}
+{{else}}
+<p class="text-gray-500 text-center py-8">No recipes yet. Add one above! ☝️</p>
+{{end}}
